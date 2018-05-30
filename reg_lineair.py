@@ -6,14 +6,19 @@
 #    By: msukhare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/30 13:44:17 by msukhare          #+#    #+#              #
-#    Updated: 2018/05/30 17:06:15 by msukhare         ###   ########.fr        #
+#    Updated: 2018/05/30 17:16:38 by msukhare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import numpy as np
+import sys
 
 def read_file():
-    fd = open("data.csv", "r")
+    [file_name] = sys.argv[1:]
+    try:
+        fd = open(file_name, "r")
+    except:
+        sys.exit("error name file")
     str_file = fd.read()
     to_ret = str_file.split('\n');
     del to_ret[-1]
@@ -40,5 +45,6 @@ def read_file():
 def main():
     graph, data = read_file()
     print(data)
+
 if __name__ == "__main__":
     main()
