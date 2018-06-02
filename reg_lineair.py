@@ -13,11 +13,11 @@
 import numpy as np
 import pandas as pd
 import sys
+import csv
 
 def read_file():
-    [file_name] = sys.argv[1:]
     try:
-        data = pd.read_csv(file_name)
+        data = pd.read_csv(sys.argv[1])
     except:
         sys.exit("error name file")
     data.insert(0, '0', 1)
@@ -46,6 +46,14 @@ def scale_feat(X_scale, j, row, min_x, max_x):
     while (i < row):
         X_scale[i][j] = X_scale[i][j] / (max_x - min_x)
         i += 1
+
+def scale_X(col_X, row_X, X_scale, X):
+    j = 1
+    while (j < col_X):
+        min_X = get_min_max(X, j, row_X, 1)
+        max_X = get_min_max(X, j, row_X, 0)
+        scale_feat(X_scale, j, row_X, min_X, max_X)
+        j += 1
 
 def hypo(X_scale, i, thetas, col_X):
     j = 0
@@ -88,17 +96,23 @@ def make_predi(thetas, tmp_thetas, X_scale, Y, row_X, col_X):
             thetas[i][0] = tmp_thetas[i][0]
             i += 1
 
+def write_in_file(thetas, col_X):
+    try:
+        c = csv.writer(open(sys.argv[2], "w"))
+    except:
+        sys.exit("fail to creat file")
+    i = 0
+    while (i < col_X):
+        c.writerow([str(thetas[i][0])])
+        i += 1
+    
+
 def main():
     data, X, Y, thetas, tmp_thetas = read_file()
     X_scale = np.array(X, dtype=float)
     row_X = X.shape[0]
     col_X = X.shape[1]
-    j = 1
-    while (j < col_X):
-        min_X = get_min_max(X, j, row_X, 1)
-        max_X = get_min_max(X, j, row_X, 0)
-        scale_feat(X_scale, j, row_X, min_X, max_X)
-        j += 1
+    scale_X(col_X, row_X, X_scale, X)
     make_predi(thetas, tmp_thetas, X_scale, Y, row_X, col_X)
     j = 1
     while (j < col_X):
@@ -106,7 +120,7 @@ def main():
         max_X = get_min_max(X, j, row_X, 0)
         thetas[j][0] = thetas[j][0] / (max_X - min_X)
         j += 1
-    print(thetas)
+    write_in_file(thetas, col_X)
 
 if __name__ == "__main__":
     main()
