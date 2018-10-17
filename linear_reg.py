@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    reg_lineair.py                                     :+:      :+:    :+:    #
+#    linear_reg.py                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: msukhare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/05/30 13:44:17 by msukhare          #+#    #+#              #
-#    Updated: 2018/06/01 17:04:53 by msukhare         ###   ########.fr        #
+#    Created: 2018/10/17 09:56:43 by msukhare          #+#    #+#              #
+#    Updated: 2018/10/17 09:57:04 by msukhare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ def get_sum(X_scale, Y, row_X, col_X, pl_the, thetas):
         i += 1
     return (somme)
 
-def guardient_descent(thetas, tmp_thetas, X_scale, Y, row_X, col_X):
+def gradient_descent(thetas, tmp_thetas, X_scale, Y, row_X, col_X):
     i = 0
     alpha = 0.1
     while (i < col_X):
@@ -105,7 +105,6 @@ def write_in_file(thetas, col_X):
     while (i < col_X):
         c.writerow([str(thetas[i][0])])
         i += 1
-    
 
 def main():
     data, X, Y, thetas, tmp_thetas = read_file()
