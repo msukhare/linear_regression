@@ -6,7 +6,7 @@
 #    By: msukhare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/17 09:56:43 by msukhare          #+#    #+#              #
-#    Updated: 2018/10/17 09:57:04 by msukhare         ###   ########.fr        #
+#    Updated: 2018/10/17 10:00:23 by msukhare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ def make_predi(thetas, tmp_thetas, X_scale, Y, row_X, col_X):
     res_bef = 0
     while (res_bef != cost_fct(thetas, X_scale, Y, row_X, col_X)):
         res_bef = cost_fct(thetas, X_scale, Y, row_X, col_X)
-        guardient_descent(thetas, tmp_thetas, X_scale, Y, row_X, col_X)
+        gradient_descent(thetas, tmp_thetas, X_scale, Y, row_X, col_X)
         i = 0
         while (i < col_X):
             thetas[i][0] = tmp_thetas[i][0]
