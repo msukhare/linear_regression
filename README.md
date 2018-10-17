@@ -30,7 +30,7 @@
 
 * You can create your own data.csv but the format must be [x1, x2, x3 ..., xm, Y]. x is the features, and Y is what you want predict and must be the last column in csv.
 
-## What you need to make linear_regression work ?
+## What do you need to make linear_regression work ?
 
 * python => 3.0
 
