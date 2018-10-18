@@ -6,7 +6,7 @@
 #    By: msukhare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/17 09:56:43 by msukhare          #+#    #+#              #
-#    Updated: 2018/10/17 10:00:23 by msukhare         ###   ########.fr        #
+#    Updated: 2018/10/18 09:58:27 by msukhare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,7 @@ def write_in_file(thetas, col_X):
     try:
         c = csv.writer(open(sys.argv[2], "w"))
     except:
-        sys.exit("fail to creat file")
+        sys.exit("fail to create file")
     i = 0
     while (i < col_X):
         c.writerow([str(thetas[i][0])])
