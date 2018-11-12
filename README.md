@@ -12,13 +12,13 @@
 
 * It writes thetas in a file after trained them.
 
-* `linear_reg.py` use [gradient descent](https://en.wikipedia.org/wiki/Gradient_descent) to minimize cost function.
+* `linear_reg.py` uses [gradient descent](https://en.wikipedia.org/wiki/Gradient_descent) to minimize cost function.
 
 * I use mean square error as cost function.
 
 ### About `appli_linear_reg.py`.
 
-* `appli_linear_reg.py' use trained thetas to predict a new prize acording to the new features passed in parameters.
+* `appli_linear_reg.py` uses trained thetas to predict a new prize acording to the new features passed in parameters.
 
 * It writes prediction in the standard output.
 
