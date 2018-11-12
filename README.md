@@ -42,8 +42,8 @@
 
 ### `linear_reg.py`
 
-* `python3 linear_reg [Data.csv] [FileContainNewThetas]`. `FileContainNewThetas` is a file which contain trained thetas and used by `appli_linear_reg.py` to predict new Y.
+* `python3 linear_reg.py [Data.csv] [FileContainNewThetas]`. `FileContainNewThetas` is a file which contain trained thetas and used by `appli_linear_reg.py` to predict new Y.
 
 ### `aplli_linear_reg`
 
-* `python3 appli_linear_reg [FileContainThetas] [Features ...]`. `FileContainThetas` is the file created by `linear_reg.py` after training. The number of features must be the same as the number of features in data.csv which used to train thetas.
+* `python3 appli_linear_reg.py [FileContainThetas] [Features ...]`. `FileContainThetas` is the file created by `linear_reg.py` after training. The number of features must be the same as the number of features in data.csv which used to train thetas.
