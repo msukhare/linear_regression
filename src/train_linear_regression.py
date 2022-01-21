@@ -61,12 +61,14 @@ if __name__ == "__main__":
             nargs='?',\
             type=str,\
             default='gradient_descent',\
+            const='gradient_descent',\
             choices=['gradient_descent', 'normal_equation'],\
             help="""correspond to back end to use during training""")
     parser.add_argument('--cost_function',\
             nargs='?',\
             type=str,\
             default='MSE',\
+            const='MSE',\
             choices=['MSE', 'RMSE', 'MAE'],\
             help="""correspond to cost function to use during training gradient descent
                 and evaluation. By default MSE""")
@@ -74,12 +76,14 @@ if __name__ == "__main__":
             nargs='?',\
             type=float,\
             default=0.1,\
+            const=0.1,\
             help="""correspond to learning rate used during training if using gradient descent.
                 By default 0.1""")
     parser.add_argument('--epochs',\
             nargs='?',\
             type=int,\
             default=100,\
+            const=100,\
             help="""correspond to numbers of epochs to do during training if using gradient descent.
                 By default 100""")
     parser.add_argument('--early_stopping',\
@@ -91,12 +95,14 @@ if __name__ == "__main__":
             nargs='?',\
             type=float,\
             default=0.10,\
+            const=0.10,\
             help="""correspond to percentage data use during training as val set in gradient descent.
                 Used if early_stopping is True. By default 0.10 percentage of data""")
     parser.add_argument('--n_epochs_no_change',\
             nargs='?',\
             type=int,\
             default=5,\
+            const=5,\
             help="""correspond to numbers of epochs wait until cost function don't change.
                 Only used in gradient descent and if --early_stoping is set at True.
                 By default 5 epochs""")
@@ -104,6 +110,7 @@ if __name__ == "__main__":
             nargs='?',\
             type=float,\
             default=1e-3,\
+            const=1e-3,\
             help="""correspond to stopping criteron in early stopping.
                 Only used in gradient descent and if --early_stopping is set at True.
                 By default 1e-3""")
@@ -111,6 +118,7 @@ if __name__ == "__main__":
             nargs='?',\
             type=str,\
             default="standardization",\
+            const="standardization",\
             choices=['standardization', 'rescaling', 'normalization'],\
             help="""correspond to technic use for features scaling. By default standardization""")
     parser.add_argument('--show_training',\
@@ -130,4 +138,5 @@ if __name__ == "__main__":
         sys.exit("Error: %s doesn't exists" %parsed_args.data_path)
     if parsed_args.Y_name is None:
         sys.exit("Error: missing name of column to predict")
+    print(parsed_args)
     main(parsed_args)
