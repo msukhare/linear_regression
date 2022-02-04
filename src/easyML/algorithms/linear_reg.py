@@ -69,7 +69,7 @@ class LinearReg:
             if self.early_stopping is True and self.val_frac <= 0 or self.val_frac >= 1:
                 raise Exception("val_frac must be superior to 0 and inferior to 1")
             if self.weights is None or self.weights.shape[0] != X.shape[1]:
-                self.weights = np.zeros(X.shape[1], dtype=float)
+                self.init_weights(X.shape[1])
             self._train_weights(X, Y)
 
     def predict(self, X):
@@ -92,6 +92,9 @@ class LinearReg:
             with open(file_name_weights + '.pth', 'wb') as fd:
                 pickle.dump(to_save, fd)
             print("saving of weights is done in %s.pth" %file_name_weights)
+
+    def init_weights(self, shape):
+        self.weights = np.zeros(shape, dtype=float)
 
     def load_weights(self, file_name_weights):
         if os.path.exists(file_name_weights) is False:
