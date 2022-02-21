@@ -7,7 +7,12 @@ import numpy as np
 from easyML import LinearReg, scaling_features
 
 def is_float(to_check):
-    return True
+    try:
+        float(to_check)
+        return True
+    except ValueError:
+        pass
+    return False
 
 def main(args):
     regressor = LinearReg()
@@ -21,14 +26,14 @@ def main(args):
         sys.exit('Error: ' + str(error))
     print("Enter mileage of car for a price estimation: ")
     for mileage in sys.stdin:
-        if is_float(mileage) is True:
+        mileage = mileage.strip()
+        if is_float(mileage) is True and float(mileage) > 0:
             data = np.asarray([[float(mileage)]])
             if pipeline is not None:
                 data, pipeline = scaling_features(data, pipeline)
-            hypo_price = regressor.predict(data)
-            print("price of car with %s km is %f \n" %(mileage, hypo_price))
+            print("price of car with %s km is %f \n" %(mileage,  regressor.predict(data)))
         else:
-            print("input data must be a float or int \n")
+            print("input data must be a positif float or int \n")
         print("Enter new mileage of car for a new price estimation: ")
 
 if __name__ == "__main__":
