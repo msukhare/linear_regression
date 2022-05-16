@@ -33,6 +33,7 @@ def main(args):
                         args.validation_fraction,\
                         args.n_epochs_no_change,\
                         args.tol,\
+                        args.r2_score_show,\
                         args.show_training)
     try:
         regressor.fit(X_train, Y_train)
@@ -126,6 +127,10 @@ if __name__ == "__main__":
             action='store_true',
             help="""if pass as params will show evolution of cost function during epochs 
                 if using gradient descent as back-end""")
+    parser.add_argument('--r2_score_show',\
+            dest='r2_score_show',\
+            action='store_true',
+            help="""if pass as params will show r2 score obtains during training""")
     parser.add_argument('--evaluate',\
             dest='evaluate',\
             action='store_true',

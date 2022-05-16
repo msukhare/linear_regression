@@ -4,6 +4,7 @@ import os
 
 from .optimizers import gradient_descent, compute_dweights, normal_equation
 from .cost_functions import linear_cost_function_methods
+from .metrics import r2
 from .activation_functions import linear_hypothesis
 from ..data_managment import split_data
 
@@ -18,6 +19,7 @@ class LinearReg:
                 val_frac=0.10,\
                 n_epochs_no_change=5,\
                 tol=1e-3,\
+                r2_score_show=False,\
                 show_training=False):
         self.weights = None
         self.optimizer = optimizer
@@ -29,6 +31,7 @@ class LinearReg:
         self.val_frac = val_frac
         self.n_epochs_no_change = n_epochs_no_change
         self.tol = tol
+        self.r2_score_show = r2_score_show
         self.show_training = show_training
 
     def _train_weights(self, X, Y):
@@ -43,9 +46,13 @@ class LinearReg:
                                     self.lr)
             train_loss = self.cost_funct(linear_hypothesis(X, self.weights), Y)
             training_process += '%f %s train set' %(train_loss, self.name_cost_fct)
+            if self.r2_score_show is True:
+                training_process += '; r2 score on train set is equal to %f' %r2(Y, linear_hypothesis(X, self.weights))
             if self.early_stopping is True:
                 loss_val = self.cost_funct(linear_hypothesis(X_val, self.weights), Y_val)
                 training_process += '; %f %s val set' %(loss_val, self.name_cost_fct)
+                if self.r2_score_show is True:
+                    training_process += '; r2 score on val set is equal to %f' %r2(Y_val, linear_hypothesis(X_val, self.weights))
             if self.show_training:
                 print(training_process)
             if self.early_stopping is True:
@@ -82,8 +89,10 @@ class LinearReg:
         return linear_hypothesis(X, self.weights)
 
     def eval(self, X, Y):
-        print("%s is equal to %f on test set" %(self.name_cost_fct,\
-                                    self.cost_funct(self.predict(X), Y)))
+        y_pred = self.predict(X)
+        print("%s is equal to %f on test set. R2 score is equal to %f on test set" %(self.name_cost_fct,\
+                                                                                    self.cost_funct(y_pred, Y),\
+                                                                                    r2(Y, y_pred)))
 
     def save_weights(self, file_name_weights, pipeline=None):
         if file_name_weights is not None:
